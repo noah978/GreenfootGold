@@ -1,0 +1,78 @@
+Prerequisites:
+ build.properties in both the greenfoot and bluej source directories should be 
+ modified to match your configuration.
+
+
+Building Greenfoot:
+
+Before you start building, check the copyright years, which is usually needed only once
+every year. The line to be updated is 'menu.help.copyright.line0', which is in the labels file:
+'labels/english/greenfoot/greenfoot-labels'.
+
+ 1. Update version number in build.xml. If there are API changes, make sure that:
+    - the API version has also been updated (see instructions in comments in build.xml)
+    - the labels have been updated with description of the API changes (see build.xml)
+    - the @version javadoc tag has been correctly set for any user-visible Greenfoot
+      classes which are affected by the API changes.
+ 
+    Then, run "ant update-version-number". This propagates the changes to various files.
+    
+ 2. Test bundled scenarios and make sure they are compatible with the new API version.
+ 3. Run "ant ready-to-run-greenfoot" in the BlueJ directory.
+ 4. Run "ant dist" in the Greenfoot directory
+ 5. Different Systems:
+    - Debian package: run "sudo ant debian-dist" to build the Debian/Ubuntu ".deb" package. You can only do this on
+      a system which has the "dpkg-deb" utility installed. It is necessary that this build target runs as root.
+    - Mac: run "ant mac-dist" in the greenfoot source directory.
+    - Windows launcher and installer: see below.
+ 6. Copy the builds and source to greenfoot.org.
+
+If necessary:
+ 7. If the API version has changed, copy Greenfoot-core-X.X.X-jar to the gallery: /home/mygame/mygame/public/sharedjars/
+ 8. If any of the 3rd party libraries have changed copy them to: /home/mygame/mygame/public/sharedjars/
+ 9. If the licenses have changed, update GREENFOOT_LICENSES and copy LICENSE.txt and/or THIRDPARTYLICENSE.txt to: www.greenfoot.org/about
+ 
+Finally:
+10. Commit any changed files (with updated version numbers etc) to the repository, and tag the release.
+ 
+
+Building the Windows installer:
+ InnoSetup build is no longer supported. For the MSI Windows package:
+ 1. Update the Greenfoot version number in bluej/package/winsetup/greenfoot.wxs (in 2 places)
+ 2. Run the Greenfoot ant script's "windows-msi-dist" target
+
+
+
+Subversion:
+ Create tag dir (not needed when using Eclipse):
+  svn+ssh://cvs.bluej.org/home/bluej/svnroot/tags/GREENFOOT_RELEASE_X_Y_Z
+ Tag BlueJ 
+  Don't forget bluej at the end of the path
+  from: svn+ssh://cvs.bluej.org/home/bluej/svnroot/trunk/bluej
+  to: svn+ssh://cvs.bluej.org/home/bluej/svnroot/tags/GREENFOOT_RELEASE_X_Y_Z/bluej
+ Tag Greenfoot 
+  Don't forget greenfoot at the end of the path
+  from: svn+ssh://cvs.bluej.org/home/bluej/svnroot/trunk/greenfoot
+  to: svn+ssh://cvs.bluej.org/home/bluej/svnroot/tags/GREENFOOT_RELEASE_X_Y_Z/greenfoot
+ 
+ 
+ 
+Trac: 
+ Create new version and new milestone version.
+ Check that all bugs for this milestone are closed or updated to a new milestone.
+ 
+ 
+Web-pages to update on www.greenfoot.org.
+These need uploading files to the greenfoot home folder:
+  (/home/greenfoot/www/download/files/javadoc)
+    update javadoc with the generated doc from create-api-doc
+These pages can be edited directly:
+  download
+  download/installation 
+  site/download_source
+  download/old-downloads.html
+  version_history
+ 
+Email:
+ send email to greenfoot-announce
+ Notify users listed in GREENFOOT_NOTIFY.txt
