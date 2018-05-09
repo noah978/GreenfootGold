@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
 	<classpathentry kind="src" output="classes" path="src"/>
+	<classpathentry kind="src" path="threadchecker/src"/>
 	<classpathentry kind="src" output="test/classes" path="test/src"/>
 	<classpathentry kind="src" output="boot/classes" path="boot/src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
@@ -27,5 +28,7 @@
 	<classpathentry kind="lib" path="lib/trilead.jar"/>
 	<classpathentry kind="lib" path="lib/xom-1.2.9.jar"/>
 	<classpathentry kind="lib" path="C:/Program Files/Java/jdk1.8.0_51/lib/tools.jar"/>
+	<classpathentry kind="lib" path="lib/slf4j-api-1.7.2.jar"/>
+	<classpathentry kind="lib" path="lib/slf4j-jdk14-1.7.2.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
