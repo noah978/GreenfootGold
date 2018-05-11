@@ -6,7 +6,6 @@
 	<classpathentry kind="src" output="boot/classes" path="boot/src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="lib" path="lib/antlr-runtime-3.4.jar"/>
-	<classpathentry kind="lib" path="lib/AppleJavaExtensions.jar"/>
 	<classpathentry kind="lib" path="lib/commons-logging-api-1.1.2.jar"/>
 	<classpathentry kind="lib" path="lib/commons-vfs2-2.0.jar"/>
 	<classpathentry kind="lib" path="lib/diffutils-1.2.1.jar"/>
@@ -30,5 +29,6 @@
 	<classpathentry kind="lib" path="C:/Program Files/Java/jdk1.8.0_51/lib/tools.jar"/>
 	<classpathentry kind="lib" path="lib/slf4j-api-1.7.2.jar"/>
 	<classpathentry kind="lib" path="lib/slf4j-jdk14-1.7.2.jar"/>
+	<classpathentry kind="lib" path="lib/AppleJavaExtensions.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
