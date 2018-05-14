@@ -26,7 +26,6 @@ package greenfoot;
  *
  * @author Fabio Heday
  * @author Amjad Altadmri
- * @author Noah Keck
  */
 public class Font
 {
@@ -38,7 +37,7 @@ public class Font
      *
      * @param font
      */
-    public Font(java.awt.Font font)
+    Font(java.awt.Font font)
     {
         this.font = font;
     }
@@ -147,31 +146,6 @@ public class Font
     }
 
     /**
-     * Returns the pixel width of a String written in this font.
-     * 
-     * @param message The String to be measured in the font.
-     * @return The pixel width of the string.
-     */
-    public int getStringWidth(String message)
-    {
-    	java.awt.geom.AffineTransform affinetransform = new java.awt.geom.AffineTransform();
-    	java.awt.font.FontRenderContext frc = new java.awt.font.FontRenderContext(affinetransform,true,true);
-    	return (int)(font.getStringBounds(message, frc).getWidth());
-    }
-    
-    /**
-     * Returns the pixel height of a String written in this font.
-     * 
-     * @param message The message to be measured in the font.
-     * @return The pixel height of the string.
-     */
-    public int getStringHeight(String message)
-    {
-    	java.awt.geom.AffineTransform affinetransform = new java.awt.geom.AffineTransform();
-    	java.awt.font.FontRenderContext frc = new java.awt.font.FontRenderContext(affinetransform,true,true);
-    	return (int)(font.getStringBounds(message, frc).getHeight());
-    }
-    /**
      * Returns a new <code>Font</code> object obtained by deriving the
      * <code>java.awt.Font font</code> field applying a new size to it.
      *
@@ -217,7 +191,7 @@ public class Font
     @Override
     public String toString()
     {
-        return "Font{" + "font=" + font + "}";
+        return "Font{" + "font=" + font + '}';
     }
 
     /**
@@ -225,7 +199,7 @@ public class Font
      *
      * @return the java.awt.Font object
      */
-    public java.awt.Font getFontObject()
+    java.awt.Font getFontObject()
     {
         return this.font;
     }

@@ -104,7 +104,7 @@ public abstract class Actor
     private int[] boundingYs = new int[4];
     /** Cached image width */
     private int imageWidth;
-    /** Cached image height */
+    /** Cached image hieght */
     private int imageHeight;
 
     static {
@@ -637,7 +637,7 @@ public abstract class Actor
     }
     
     /**
-     * Translate a cell coordinate into a pixel. This will return the coordinate of the center of he cell.
+     * Translate a cell coordinate into a pixel. This will return the coordinate of the centre of he cell.
      */
     int toPixel(int x)
     {        
@@ -1093,9 +1093,9 @@ public abstract class Actor
     /**
      * Get the default image for objects of this class. May return null.
      */
-    GreenfootImage getImage(Class<?> cls)
+    GreenfootImage getImage(Class<?> clazz)
     {
-        return delegate.getImage(cls.getName());
+        return delegate.getImage(clazz.getName());
     }
 
     /**
