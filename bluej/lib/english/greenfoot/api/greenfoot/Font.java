@@ -26,6 +26,7 @@ package greenfoot;
  *
  * @author Fabio Heday
  * @author Amjad Altadmri
+ * @author Noah Keck
  */
 public class Font
 {
