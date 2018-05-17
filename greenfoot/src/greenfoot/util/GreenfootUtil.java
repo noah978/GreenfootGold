@@ -914,7 +914,7 @@ public class GreenfootUtil
             for (int i = 0 ;i < userName.length(); i += CHARS_PER_LINE)
                 wrappedName.append(userName.substring(i, Math.min(userName.length(), i + CHARS_PER_LINE))).append("\n");
                     
-            GreenfootImage textImage = new GreenfootImage(wrappedName.toString(), 15, greenfoot.Color.WHITE, greenfoot.Color.DARK_GRAY);
+            GreenfootImage textImage = new GreenfootImage(wrappedName.toString(), 15, greenfoot.Color.WHITE, greenfoot.Color.DARK_GRAY, null);
             r.drawImage(textImage, Math.max(0, (50 - textImage.getWidth()) / 2), Math.max(0, (50 - textImage.getHeight()) / 2));
         }
         // Should never return null:

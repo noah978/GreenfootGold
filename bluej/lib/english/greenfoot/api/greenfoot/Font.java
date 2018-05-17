@@ -21,6 +21,8 @@
  */
 package greenfoot;
 
+import greenfoot.util.GraphicsUtilities;
+
 /**
  * A representation of a Font. The Font can be used to write text on the screen.
  *
@@ -125,6 +127,7 @@ public class Font
     {
         return this.font.isItalic();
     }
+   
 
     /**
      * Returns the logical name of this font.
@@ -154,9 +157,9 @@ public class Font
      */
     public int getStringWidth(String message)
     {
-    	java.awt.geom.AffineTransform affinetransform = new java.awt.geom.AffineTransform();
-    	java.awt.font.FontRenderContext frc = new java.awt.font.FontRenderContext(affinetransform,true,true);
-    	return (int)(font.getStringBounds(message, frc).getWidth());
+    	String[] lines = GraphicsUtilities.splitLines(message);
+        GraphicsUtilities.MultiLineStringDimensions d = GraphicsUtilities.getMultiLineStringDimensions(lines, font.getStyle(), font.getSize());
+        return d.getWidth();
     }
     
     /**
@@ -167,9 +170,9 @@ public class Font
      */
     public int getStringHeight(String message)
     {
-    	java.awt.geom.AffineTransform affinetransform = new java.awt.geom.AffineTransform();
-    	java.awt.font.FontRenderContext frc = new java.awt.font.FontRenderContext(affinetransform,true,true);
-    	return (int)(font.getStringBounds(message, frc).getHeight());
+    	String[] lines = GraphicsUtilities.splitLines(message);
+        GraphicsUtilities.MultiLineStringDimensions d = GraphicsUtilities.getMultiLineStringDimensions(lines, font.getStyle(), font.getSize());
+        return d.getHeight();
     }
     /**
      * Returns a new <code>Font</code> object obtained by deriving the
