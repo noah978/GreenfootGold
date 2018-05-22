@@ -1,9 +1,12 @@
 # GreenfootGold
 A modified version of the original Greenfoot Java IDE.
 
-# Instructions for Installation
-This repository is compatible with eclipse and contains all the neccessary settings to run in the latest version of eclipse. If you are using an older version of eclipse you will need to download a branch that matches that version. Currently the master supports eclipse oxygen and a separate branch works on eclipse mars.
+# Instructions for Installation in Eclipse
 
-In the bluej/docs folder there will be a text file with the extension .how-to-open-bluej-in-eclipse or something similar. Open the document with wordpad or Microsoft Word. Follow the instructions exactly as written, some steps may already be completed for you. Then go to greenfoot/docs and another text file with an extension similar to the one you followed for bluej. Follow all of these directions, some may already be completed.
+In the bluej/docs folder there will be a text file with the extension .how-to-open-bluej-in-eclipse or something similar. Open the document with wordpad or Microsoft Word. Follow the instructions exactly as written. Then go to greenfoot/docs and another text file with an extension similar to the one you followed for bluej. Follow all of these directions and it will setup the source code in eclipse.
 
 When you have completed all the directions, greenfoot should run properly. Any edits you make to the source code should appear when you run the program.
+
+## If you only want to run the updated greenfooot
+
+There is a compiled and ready-to-run collection of installers for various systems in the releases section.
