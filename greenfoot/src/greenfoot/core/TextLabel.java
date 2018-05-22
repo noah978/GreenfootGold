@@ -59,7 +59,7 @@ public class TextLabel
     public void draw(Graphics2D g, int cellsize)
     {
         if (dimensions == null) {
-            dimensions = GraphicsUtilities.getMultiLineStringDimensions(lines, Font.BOLD, 25.0);
+            dimensions = GraphicsUtilities.getMultiLineStringDimensions(lines, new Font("SansSerif", Font.BOLD, 25));
         }
         
         // Position of base line:

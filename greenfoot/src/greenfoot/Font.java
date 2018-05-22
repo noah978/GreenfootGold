@@ -21,11 +21,14 @@
  */
 package greenfoot;
 
+import greenfoot.util.GraphicsUtilities;
+
 /**
  * A representation of a Font. The Font can be used to write text on the screen.
  *
  * @author Fabio Heday
  * @author Amjad Altadmri
+ * @author Noah Keck
  */
 public class Font
 {
@@ -37,7 +40,7 @@ public class Font
      *
      * @param font
      */
-    Font(java.awt.Font font)
+    public Font(java.awt.Font font)
     {
         this.font = font;
     }
@@ -124,6 +127,7 @@ public class Font
     {
         return this.font.isItalic();
     }
+   
 
     /**
      * Returns the logical name of this font.
@@ -145,6 +149,31 @@ public class Font
         return this.font.getSize();
     }
 
+    /**
+     * Returns the pixel width of a String written in this font.
+     * 
+     * @param message The String to be measured in the font.
+     * @return The pixel width of the string.
+     */
+    public int getStringWidth(String message)
+    {
+    	String[] lines = GraphicsUtilities.splitLines(message);
+        GraphicsUtilities.MultiLineStringDimensions d = GraphicsUtilities.getMultiLineStringDimensions(lines, font);
+        return d.getWidth();
+    }
+    
+    /**
+     * Returns the pixel height of a String written in this font.
+     * 
+     * @param message The message to be measured in the font.
+     * @return The pixel height of the string.
+     */
+    public int getStringHeight(String message)
+    {
+    	String[] lines = GraphicsUtilities.splitLines(message);
+        GraphicsUtilities.MultiLineStringDimensions d = GraphicsUtilities.getMultiLineStringDimensions(lines, font);
+        return d.getHeight();
+    }
     /**
      * Returns a new <code>Font</code> object obtained by deriving the
      * <code>java.awt.Font font</code> field applying a new size to it.
@@ -191,7 +220,7 @@ public class Font
     @Override
     public String toString()
     {
-        return "Font{" + "font=" + font + '}';
+        return "Font{" + "font=" + font + "}";
     }
 
     /**
@@ -199,7 +228,7 @@ public class Font
      *
      * @return the java.awt.Font object
      */
-    java.awt.Font getFontObject()
+    public java.awt.Font getFontObject()
     {
         return this.font;
     }

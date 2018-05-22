@@ -158,58 +158,61 @@ public class GreenfootImage
     /**
      * Creates an image with the given string drawn as text using the given font size, with the given foreground
      * GreenfootColor on the given background GreenfootColor.  If the string has newline characters, it
-     * is split into multiple lines which are drawn horizontally-centred.
+     * is split into multiple lines which are drawn horizontally-centered.
      * 
      * @param string the string to be drawn
-     * @param size the requested height in pixels of each line of text (the actual height may be different by a pixel or so)
+     * @param size the requested height in pixels of each line of text (the actual height may be different by a pixel or so). Default font of SansSerif is used.
      * @param foreground the color of the text.  Since Greenfoot 3.0.4, passing null will use black.
      * @param background the color of the image behind the text.  Since Greenfoot 3.0.4, passing null with leave the background transparent.
+     * @param outline the color of the outline that will be drawn around the text.  Passing null will draw no outline.
      * @since 3.0.4
      */
-    public GreenfootImage(String string, int size, greenfoot.Color foreground, greenfoot.Color background)
+    public GreenfootImage(String string, int size, greenfoot.Color foreground, greenfoot.Color background, greenfoot.Color outline)
     {
-        this(string, size, foreground.getColorObject(), background.getColorObject(), null);
-    }
-    
-    /**
-     * Creates an image with the given string drawn as text using the given font size, with the given foreground
-     * color on the given background color.  If the string has newline characters, it
-     * is split into multiple lines which are drawn horizontally-centred.
-     * 
-     * @param string the string to be drawn
-     * @param size the requested height in pixels of each line of text (the actual height may be different by a pixel or so)
-     * @param foreground the color of the text.  Since Greenfoot 2.2.0, passing null will use black.
-     * @param background the color of the image behind the text.  Since Greenfoot 2.2.0, passing null with leave the background transparent.
-     * @param outline the colour of the outline that will be drawn around the text.  Passing null will draw no outline.
-     * @since 2.4.0
-     */
-    GreenfootImage(String string, int size, Color foreground, Color background, Color outline)
-    {
-        String[] lines = GraphicsUtilities.splitLines(string);
-        GraphicsUtilities.MultiLineStringDimensions d = GraphicsUtilities.getMultiLineStringDimensions(lines, Font.BOLD, size);
-        image = GraphicsUtilities.createCompatibleTranslucentImage(d.getWidth(), d.getHeight());
-        Graphics2D g = (Graphics2D)image.getGraphics();
-        g.setColor(background == null ? new Color(0, 0, 0, 0) : background);
-        g.fillRect(0, 0, image.getWidth(), image.getHeight());
-        GraphicsUtilities.drawOutlinedText(g, d, foreground, outline);
-        g.dispose();
+        this(string, new greenfoot.Font(false, false, size), foreground, background, outline);
     }
     
     /**
      * Creates an image with the given string drawn as text using the given font size, with the given foreground
      * GreenfootColor on the given background GreenfootColor.  If the string has newline characters, it
-     * is split into multiple lines which are drawn horizontally-centred.
+     * is split into multiple lines which are drawn horizontally-centered.
      * 
-     * @param string the string to be drawn
-     * @param size the requested height in pixels of each line of text (the actual height may be different by a pixel or so)
+     * @param string the string to be drawn.
+     * @param font the font for the text to be drawn with.
      * @param foreground the color of the text.  Since Greenfoot 3.0.4, passing null will use black.
      * @param background the color of the image behind the text.  Since Greenfoot 3.0.4, passing null with leave the background transparent.
-     * @param outline the colour of the outline that will be drawn around the text.  Passing null will draw no outline.
+     * @param outline the color of the outline that will be drawn around the text.  Passing null will draw no outline.
      * @since 3.0.4
      */
-    public GreenfootImage(String string, int size, greenfoot.Color foreground, greenfoot.Color background, greenfoot.Color outline)
+    public GreenfootImage(String string, greenfoot.Font font, greenfoot.Color foreground, greenfoot.Color background, greenfoot.Color outline)
     {
-        this(string, size, foreground.getColorObject(), background.getColorObject(), outline.getColorObject());
+        this(string, font.getFontObject(), foreground != null ? foreground.getColorObject() : null, background != null ? background.getColorObject() : null, outline != null ? outline.getColorObject() : null);
+    }
+    
+    /**
+     * Creates an image with the given string drawn as text using the given font size, with the given foreground
+     * color on the given background color.  If the string has newline characters, it
+     * is split into multiple lines which are drawn horizontally-centered.
+     * 
+     * @param string the string to be drawn.
+     * @param font the font for the text to be drawn with.
+     * @param foreground the color of the text.  Since Greenfoot 2.2.0, passing null will use black.
+     * @param background the color of the image behind the text.  Since Greenfoot 2.2.0, passing null with leave the background transparent.
+     * @param outline the color of the outline that will be drawn around the text.  Passing null will draw no outline.
+     * @since 2.4.0
+     */
+    private GreenfootImage(String string, Font font, Color foreground, Color background, Color outline)
+    {
+        String[] lines = GraphicsUtilities.splitLines(string);
+        GraphicsUtilities.MultiLineStringDimensions d = GraphicsUtilities.getMultiLineStringDimensions(lines, font);
+        image = GraphicsUtilities.createCompatibleTranslucentImage(d.getWidth(), d.getHeight());
+        Graphics2D g = (Graphics2D)image.getGraphics();
+        currentFont = new greenfoot.Font(font);
+        g.setFont(font);
+        g.setColor(background == null ? new Color(0, 0, 0, 0) : background);
+        g.fillRect(0, 0, image.getWidth(), image.getHeight());
+        GraphicsUtilities.drawOutlinedText(g, d, foreground, outline);
+        g.dispose();
     }
     
     //Package-visible:

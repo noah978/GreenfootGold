@@ -652,7 +652,7 @@ public class GraphicsUtilities {
         if (foreground == null)
             foreground = Color.BLACK;
         
-        g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+        setAllTextRenderingHints(g);
         
         for (int i = 0; i < d.lineShapes.length;i++) {
             g.setColor(foreground);
@@ -667,45 +667,16 @@ public class GraphicsUtilities {
         }
     }
 
-    // Gets the height of the given string in the given graphics context 
-    // From: http://stackoverflow.com/questions/368295/how-to-get-real-string-height-in-java
-    private static double getStringHeight(Graphics2D g, String str)
+    private static void setAllTextRenderingHints(Graphics2D g)
     {
-        FontRenderContext frc = g.getFontRenderContext();
-        GlyphVector gv = g.getFont().createGlyphVector(frc, str);
-        return gv.getPixelBounds(null, 0, 0).getHeight();
-    }
-
-    /**
-     * Sets the font on the given graphics context to have the given style and target size
-     * @param g
-     * @param style The font style (e.g. Font.PLAIN)
-     * @param targetSize The target height of the line
-     */
-    private static void setFontOfPixelHeight(Graphics2D g, int style, double targetSize)
-    {
-        // Likely DPI ranges for a monitor: 120 to 500 pixels per inch (via wikipedia)
-        // An inch is 72 points, so range is something like 1 pixel per point to 8 pixels per point
-        // So we explore from 1 point, up to the desired pixel size in points.
-        // e.g. if we want 40 pixels, then a 40 point font is going to be bigger than 40 pixels if the display is above 72 DPI
-        Font font = new Font("SansSerif", style, 1);
-        
-        for (int i = 1; i < targetSize; i++)
-        {
-            Font bigger = font.deriveFont((float)i);
-            g.setFont(bigger);
-            // This string should be full height in the font:
-            if (bigger.getLineMetrics("WBLMNqpyg", g.getFontRenderContext()).getHeight() < targetSize) // getStringHeight(g, "WBLMNqpyg") < targetSize)
-            {
-                font = bigger;
-            }
-            else
-            {
-                break; // Too big; keep previous
-            }
-        }
-        g.setFont(font);
-    
+    	g.setRenderingHint(RenderingHints.KEY_ALPHA_INTERPOLATION, RenderingHints.VALUE_ALPHA_INTERPOLATION_QUALITY);
+        g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+        g.setRenderingHint(RenderingHints.KEY_COLOR_RENDERING, RenderingHints.VALUE_COLOR_RENDER_QUALITY);
+        g.setRenderingHint(RenderingHints.KEY_DITHERING, RenderingHints.VALUE_DITHER_ENABLE);
+        g.setRenderingHint(RenderingHints.KEY_FRACTIONALMETRICS, RenderingHints.VALUE_FRACTIONALMETRICS_ON);
+        g.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
+        g.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
+        g.setRenderingHint(RenderingHints.KEY_STROKE_CONTROL, RenderingHints.VALUE_STROKE_PURE);
     }
 
     // Splits lines by newlines, and strips \r:
@@ -716,27 +687,27 @@ public class GraphicsUtilities {
 
     /**
      * Given a list of lines, gets the dimensions/outlines of the lines when drawn in the given style,
-     * one above the other, horizontally centred.  The shapes will be drawn relative to the
+     * one above the other, horizontally centered.  The shapes will be drawn relative to the
      * top-left of the image.
      * 
      * @param lines The text lines to draw.  Should be the output of splitLines
-     * @param style The style (e.g. Font.PLAIN)
+     * @param font the font to be rendered with
      * @param size The height in pixels of each line of text
      * @return The dimensions of the lines
      */
-    public static MultiLineStringDimensions getMultiLineStringDimensions(String[] lines, int style, double size)
+    public static MultiLineStringDimensions getMultiLineStringDimensions(String[] lines, Font font)
     {
         BufferedImage image = createCompatibleTranslucentImage(1, 1);
         MultiLineStringDimensions r = new MultiLineStringDimensions(lines.length);
-        Graphics2D g = (Graphics2D)image.getGraphics();
-        g.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
-        setFontOfPixelHeight(g, style, size);
+        Graphics2D g = image.createGraphics();
+        setAllTextRenderingHints(g);
+        g.setFont(font);
         
         FontRenderContext frc = g.getFontRenderContext();
         Rectangle2D[] lineBounds = new Rectangle2D[lines.length];
         int maxX = 1;
         int y = 0;
-        for (int i = 0; i < lines.length;i++)
+        for (int i = 0; i < lines.length; i++)
         {
             lineBounds[i] = g.getFontMetrics().getStringBounds(lines[i], g);
             maxX = Math.max(maxX, (int)Math.ceil(lineBounds[i].getWidth()));
@@ -750,7 +721,7 @@ public class GraphicsUtilities {
         {
             // Draw the shape in the right space in the overall text, by translating it down and moving to middle:
             AffineTransform translate = AffineTransform.getTranslateInstance((r.overallBounds.getWidth() - lineBounds[i].getWidth()) / 2, y - lineBounds[i].getMinY() /* add on to baseline */);
-            r.lineShapes[i] = new TextLayout(!lines[i].isEmpty()? lines[i] : " ", g.getFont(), frc).getOutline(translate);
+            r.lineShapes[i] = (new TextLayout(!lines[i].isEmpty()? lines[i] : " ", font, frc)).getOutline(translate);
             y += Math.ceil(lineBounds[i].getHeight());
         }
         // Make it at least one pixel, and add one for the outline width:
