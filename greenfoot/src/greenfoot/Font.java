@@ -23,6 +23,7 @@ package greenfoot;
 
 import greenfoot.util.GraphicsUtilities;
 
+
 /**
  * A representation of a Font. The Font can be used to write text on the screen.
  *
@@ -32,7 +33,7 @@ import greenfoot.util.GraphicsUtilities;
  */
 public class Font
 {
-
+	
     private final java.awt.Font font;
 
     /**
