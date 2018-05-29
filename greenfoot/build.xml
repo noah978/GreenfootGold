@@ -13,8 +13,8 @@
     <property file="${bluej.projectdir}/build.properties"/>
 
     <!-- Greenfoot Version Number -->
-    <property name="greenfoot.version.major" value="3"/>
-    <property name="greenfoot.version.minor" value="1"/>
+    <property name="greenfoot.version.major" value="4"/>
+    <property name="greenfoot.version.minor" value="0"/>
     <property name="greenfoot.version.micro" value="0"/>
     <property name="greenfoot.version.suffix" value="" />
     
@@ -27,7 +27,7 @@
     A warning will be shown to the user - update the greenfoot-labels file to
     specify the breaking changes introduced in this version. -->
     <!-- YOU MUST UPDATE THE GREENFOOT LABELS if you change this -->
-    <property name="greenfoot.apiversion.breaking" value="3"/>
+    <property name="greenfoot.apiversion.breaking" value="4"/>
     
     <!-- Change when API has changed in a way that is visible to the user, but is very 
     unlikely to break scenarios (documentation changes, addition of method).

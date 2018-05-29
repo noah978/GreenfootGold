@@ -50,7 +50,8 @@ import java.net.URL;
  * and/or drawn by using various drawing methods.
  * 
  * @author Poul Henriksen
- * @version 2.6
+ * @author Noah Keck
+ * @version 2.7
  */
 public class GreenfootImage
 {

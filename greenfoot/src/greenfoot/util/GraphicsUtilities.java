@@ -31,7 +31,6 @@ package greenfoot.util;
  */
 
 import java.awt.font.FontRenderContext;
-import java.awt.font.GlyphVector;
 import java.awt.font.TextLayout;
 import java.awt.geom.AffineTransform;
 import java.awt.geom.Rectangle2D;
@@ -79,6 +78,7 @@ import javax.imageio.ImageIO;
  * performance.</p>
  *
  * @author Romain Guy <romain.guy@mac.com>
+ * @author Noah Keck
  */
 public class GraphicsUtilities {
 
